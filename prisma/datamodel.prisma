@@ -1,6 +1,7 @@
 type VisitForm {
   id: ID! @id
   clientName: String!
+  address: String!
   visitDatetime: DateTime!
   outcomeIndex: Int!
   ableToMakeDecisions: Boolean! @default(value: false)

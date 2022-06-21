@@ -55,6 +55,7 @@ type Subscription {
 type VisitForm {
   id: ID!
   clientName: String!
+  address: String!
   visitDatetime: DateTime!
   outcomeIndex: Int!
   ableToMakeDecisions: Boolean!
@@ -70,6 +71,7 @@ type VisitFormConnection {
 input VisitFormCreateInput {
   id: ID
   clientName: String!
+  address: String!
   visitDatetime: DateTime!
   outcomeIndex: Int!
   ableToMakeDecisions: Boolean
@@ -86,6 +88,8 @@ enum VisitFormOrderByInput {
   id_DESC
   clientName_ASC
   clientName_DESC
+  address_ASC
+  address_DESC
   visitDatetime_ASC
   visitDatetime_DESC
   outcomeIndex_ASC
@@ -99,6 +103,7 @@ enum VisitFormOrderByInput {
 type VisitFormPreviousValues {
   id: ID!
   clientName: String!
+  address: String!
   visitDatetime: DateTime!
   outcomeIndex: Int!
   ableToMakeDecisions: Boolean!
@@ -123,6 +128,7 @@ input VisitFormSubscriptionWhereInput {
 
 input VisitFormUpdateInput {
   clientName: String
+  address: String
   visitDatetime: DateTime
   outcomeIndex: Int
   ableToMakeDecisions: Boolean
@@ -131,6 +137,7 @@ input VisitFormUpdateInput {
 
 input VisitFormUpdateManyMutationInput {
   clientName: String
+  address: String
   visitDatetime: DateTime
   outcomeIndex: Int
   ableToMakeDecisions: Boolean
@@ -166,6 +173,20 @@ input VisitFormWhereInput {
   clientName_not_starts_with: String
   clientName_ends_with: String
   clientName_not_ends_with: String
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
   visitDatetime: DateTime
   visitDatetime_not: DateTime
   visitDatetime_in: [DateTime!]
