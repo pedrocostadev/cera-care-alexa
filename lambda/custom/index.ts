@@ -2,7 +2,7 @@ import * as Alexa from 'ask-sdk-core';
 
 import * as Errors from './errors';
 import * as DefaultIntents from './intents';
-import * as CustomIntents from './intents/hello';
+import * as CustomIntents from './intents/customs';
 import * as Interceptors from './interceptors';
 
 export const handler = Alexa.SkillBuilders.custom()
@@ -18,8 +18,8 @@ export const handler = Alexa.SkillBuilders.custom()
         DefaultIntents.Fallback,
 
         // Hello intents
-        CustomIntents.HelloWorld,
-        CustomIntents.HowIsTheWeather
+        CustomIntents.GetClientName,
+        CustomIntents.GetVisitDateTime
     )
     .addErrorHandlers(
         Errors.Unknown,

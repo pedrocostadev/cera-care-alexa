@@ -7,9 +7,9 @@ export const Launch: RequestHandler = {
         return skillHelpers.isType(handlerInput, RequestTypes.Launch);
     },
     handle(handlerInput) {
-        const { t } = skillHelpers.getRequestAttributes(handlerInput);
+        const { t: tr, t } = skillHelpers.getRequestAttributes(handlerInput);
 
-        const speechText = t(Strings.WELCOME_MSG);
+        const speechText = tr(Strings.WELCOME_MSG);
 
         return handlerInput.responseBuilder
             .speak(speechText)

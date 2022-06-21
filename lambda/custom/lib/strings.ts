@@ -3,7 +3,7 @@ import { Strings, LocaleTypes } from "./constants";
 
 interface IStrings {
     [Strings.SKILL_NAME]: string;
-    [Strings.WELCOME_MSG]: string;
+    [Strings.WELCOME_MSG]: string[];
     [Strings.STRINGARRAY_MSG]: string[];
     [Strings.GOODBYE_MSG]: string;
     [Strings.HELLO_MSG]: string;
@@ -16,7 +16,10 @@ export const resourceStrings: Resource = {
     [LocaleTypes.enGB]: {
         translation: {
             SKILL_NAME: "Hello world",
-            WELCOME_MSG: "Welcome to the Alexa Skills Kit, you can say hello!",
+            WELCOME_MSG: [
+                "Welcome to the Zé Skill, you can say 'Add new visit'", 
+                "Welcome this is Zé Skill, you can say 'I'm in some client's house'"
+            ],
             STRINGARRAY_MSG: [
                 "The weather is good.. I hope that you have a good day.",
                 "It's raining cats and dogs!"

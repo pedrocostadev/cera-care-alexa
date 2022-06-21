@@ -10,14 +10,23 @@ export enum IntentTypes {
     Stop = "AMAZON.StopIntent",
     Cancel = "AMAZON.CancelIntent",
     Fallback = "AMAZON.FallbackIntent",
-
-    HelloWorld = "HelloWorldIntent",
-    HowIsTheWeather = "HowIsTheWeather"
+    
+    // Custom Intents
+    GetVisitDateTimeIntent = "GetVisitDateTimeIntent",
+    GetClientNameIntent = "GetClientNameIntent",
+    AddOutcomeIntent = "AddOutcomeIntent"
 }
 
 export enum ErrorTypes {
     Unknown = "UnknownError",
     Unexpected = "UnexpectedError",
+}
+
+export enum SlotsTypes{
+    VisitDateSlot = "VisitDateSlot",
+    VisitTimeSlot = "VisitTimeSlot",
+    ClientAddressSlot = "ClientAddressSlot",
+    ClientNameSlot = "ClientNameSlot"
 }
 
 export enum LocaleTypes {
@@ -35,6 +44,8 @@ export enum LocaleTypes {
 
 export enum Strings {
     SKILL_NAME = "SKILL_NAME",
+    ASK_VISIT_TIME_MSG = "ASK_VISIT_TIME_MSG",
+    ASK_CLIENT_NAME_MSG = "ASK_CLIENT_NAME_MSG",
     WELCOME_MSG = "WELCOME_MSG",
     GOODBYE_MSG = "GOODBYE_MSG",
     HELLO_MSG = "HELLO_MSG",

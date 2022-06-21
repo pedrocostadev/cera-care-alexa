@@ -2,9 +2,9 @@ import { RequestHandler } from 'ask-sdk-core';
 
 import { IntentTypes, skillHelpers, Strings } from '../../lib';
 
-export const HelloWorld: RequestHandler = {
+export const GetClientName: RequestHandler = {
     canHandle(handlerInput) {
-        return skillHelpers.isIntent(handlerInput, IntentTypes.HelloWorld);
+        return skillHelpers.isIntent(handlerInput, IntentTypes.GetClientNameIntent);
     },
     handle(handlerInput) {
         const { t } = skillHelpers.getRequestAttributes(handlerInput);

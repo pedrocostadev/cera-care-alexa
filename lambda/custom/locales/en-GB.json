@@ -1,13 +1,23 @@
 {
-    "STRINGARRAY_MSG": [
+    "ADD_VISIT": [
         "The weather is good.. I hope that you have a good day.",
         "It's raining cats and dogs!"
     ],
-    "SKILL_NAME": "Hello world",
-    "WELCOME_MSG": "Welcome to the Alexa Skills Kit, you can say hello!",
+    "WELCOME_MSG": [
+        "Welcome to the Zé Skill, you can say 'Add new visit'",
+        "Welcome this is Zé Skill, you can say 'I'm in some client's house'"
+    ],
     "GOODBYE_MSG": "Goodbye!",
-    "HELLO_MSG": "Hello world!",
-    "HELP_MSG": "You can say hello to me!",
-    "ERROR_MSG": "Sorry, I can't understand the command. Please say again.",
-    "ERROR_UNEXPECTED_MSG": "Sorry, an unexpected error has occured. Please try again later."
+    "HELLO_MSG": [
+        "Hello world!"
+    ],
+    "ASK_VISIT_TIME_MSG": [
+        "What time the visit should occurs?"
+    ],
+    "ASK_CLIENT_NAME_MSG": [
+        "What is the client are you visiting now?"
+    ],
+    "HELP_MSG":[ "You can say hello to me!"],
+    "ERROR_MSG": ["Sorry, I can't understand the command. Please say again."],
+    "ERROR_UNEXPECTED_MSG": ["Sorry, an unexpected error has occured. Please try again later."]
 }
