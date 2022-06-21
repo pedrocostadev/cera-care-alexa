@@ -17,7 +17,7 @@ export const Localization: RequestInterceptor = {
             return i18next.t(key, args)
         };
 
-        attributes.t = function (key: any, ...args: any[]) {
+        attributes.tr = function (key: any, ...args: any[]) {
             const result = i18next.t<string[]>(key, args);
 
             return skillHelpers.random(result);

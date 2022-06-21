@@ -7,14 +7,13 @@ export const Help: RequestHandler = {
         return skillHelpers.isIntent(handlerInput, IntentTypes.Help);
     },
     handle(handlerInput) {
-        const { t } = skillHelpers.getRequestAttributes(handlerInput);
+        const { tr } = skillHelpers.getRequestAttributes(handlerInput);
 
-        const speechText = t(Strings.HELP_MSG);
+        const speechText = tr(Strings.HELP_MSG);
 
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
-            .withSimpleCard(t(Strings.SKILL_NAME), speechText)
             .getResponse();
     }
 };

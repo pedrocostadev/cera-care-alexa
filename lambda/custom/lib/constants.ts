@@ -42,14 +42,17 @@ export enum LocaleTypes {
     jaJP = "ja-JP",
 }
 
+export enum AttributesSession {
+    VisitDateTime = "VisitDateTime",
+    ClientData = "ClientData"
+}
+
 export enum Strings {
-    SKILL_NAME = "SKILL_NAME",
     ASK_VISIT_TIME_MSG = "ASK_VISIT_TIME_MSG",
     ASK_CLIENT_NAME_MSG = "ASK_CLIENT_NAME_MSG",
     WELCOME_MSG = "WELCOME_MSG",
     GOODBYE_MSG = "GOODBYE_MSG",
     HELLO_MSG = "HELLO_MSG",
-    STRINGARRAY_MSG = "STRINGARRAY_MSG",
     HELP_MSG = "HELP_MSG",
     ERROR_MSG = "ERROR_MSG",
     ERROR_UNEXPECTED_MSG = "ERROR_UNEXPECTED_MSG"

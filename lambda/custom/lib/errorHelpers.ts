@@ -3,19 +3,21 @@ import { ErrorTypes } from './constants';
 /**
  * Creates an error with the given message and type.
  * 
- * @param msg 
+ * @param error 
  * @param type 
+ * @returns 
  */
-function createError(
-    msg: string = "Something unexpected happened.",
-    type: ErrorTypes = ErrorTypes.Unknown
+ function createError(
+   error: Error,
+   type: ErrorTypes = ErrorTypes.Unknown
 ): Error {
-    const error = new Error(msg);
-    error.name = type;
+    const e = new Error(error.message);
+    e.name = type;
+    e.stack = error.stack;
 
-    return error;
+    return e;
 }
 
 export const errorHelper = {
-    createError
+    createError,
 }

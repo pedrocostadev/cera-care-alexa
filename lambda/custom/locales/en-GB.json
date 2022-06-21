@@ -15,7 +15,7 @@
         "What time the visit should occurs?"
     ],
     "ASK_CLIENT_NAME_MSG": [
-        "What is the client are you visiting now?"
+        "What is the client house are you visiting now?"
     ],
     "HELP_MSG":[ "You can say hello to me!"],
     "ERROR_MSG": ["Sorry, I can't understand the command. Please say again."],

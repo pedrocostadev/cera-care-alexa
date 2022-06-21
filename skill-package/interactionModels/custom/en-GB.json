@@ -1,0 +1,123 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "fill cera form",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "GetClientNameIntent",
+                    "slots": [
+                        {
+                            "name": "ClientNameSlot",
+                            "type": "AMAZON.GB_FIRST_NAME"
+                        },
+                        {
+                            "name": "ClientAddressSlot",
+                            "type": "AMAZON.GB_REGION"
+                        }
+                    ],
+                    "samples": [
+                        "{ClientAddressSlot}",
+                        "i'm at {ClientAddressSlot}",
+                        "i'm in {ClientNameSlot} house at {ClientAddressSlot}",
+                        "i'm in {ClientNameSlot} house"
+                    ]
+                },
+                {
+                    "name": "GetVisitDateTimeIntent",
+                    "slots": [
+                        {
+                            "name": "VisitDateSlot",
+                            "type": "AMAZON.DATE"
+                        },
+                        {
+                            "name": "VisitTimeSlot",
+                            "type": "AMAZON.TIME"
+                        },
+                        {
+                            "name": "VisitWordSlot",
+                            "type": "VisitCustomWord"
+                        }
+                    ],
+                    "samples": [
+                        "{VisitTimeSlot}",
+                        "{VisitWordSlot} {VisitDateSlot}",
+                        "{VisitWordSlot} {VisitDateSlot} at {VisitTimeSlot}"
+                    ]
+                },
+                {
+                    "name": "AddOutcomeIntent",
+                    "slots": [
+                        {
+                            "name": "OutcomeWordSlot",
+                            "type": "OutcomeCustomWord"
+                        }
+                    ],
+                    "samples": [
+                        "{OutcomeWordSlot} "
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "VisitCustomWord",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "visit",
+                                "synonyms": [
+                                    "create new visit",
+                                    "add new visit",
+                                    "save visit",
+                                    "add visit",
+                                    "create visit",
+                                    "visit",
+                                    "new visit"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "OutcomeCustomWord",
+                    "values": [
+                        {
+                            "id": "outcome",
+                            "name": {
+                                "value": "outcome",
+                                "synonyms": [
+                                    "save new outcome",
+                                    "save outcome",
+                                    "add outcome",
+                                    "create outcome",
+                                    "new outcome",
+                                    "create new outcome",
+                                    "add new outcome"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

@@ -8,7 +8,7 @@ export interface RequestAttributes {
      * @param key 
      * @param args 
      */
-    t(key: string, ...args: any[]): any;
+    t(key: string, ...args: any[]): string;
 
     /**
      * Randomly picks a translation for the given key and returns it.
