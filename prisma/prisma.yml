@@ -4,3 +4,6 @@ databaseType: document
 hooks:
   post-deploy:
     - prisma1 generate
+generate:
+  - generator: javascript-client
+    output: ./client/generated/
