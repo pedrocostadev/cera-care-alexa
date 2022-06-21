@@ -1,0 +1,9 @@
+type VisitForm {
+  id: ID! @id
+  clientName: String!
+  visitDatetime: DateTime!
+  outcomeIndex: Int!
+  ableToMakeDecisions: Boolean! @default(value: false)
+  careDecisions: Boolean! @default(value: false)
+}
+
