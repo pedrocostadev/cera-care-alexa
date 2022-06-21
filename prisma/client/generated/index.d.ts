@@ -106,6 +106,8 @@ export type VisitFormOrderByInput =
   | "id_DESC"
   | "clientName_ASC"
   | "clientName_DESC"
+  | "address_ASC"
+  | "address_DESC"
   | "visitDatetime_ASC"
   | "visitDatetime_DESC"
   | "outcomeIndex_ASC"
@@ -150,6 +152,20 @@ export interface VisitFormWhereInput {
   clientName_not_starts_with?: Maybe<String>;
   clientName_ends_with?: Maybe<String>;
   clientName_not_ends_with?: Maybe<String>;
+  address?: Maybe<String>;
+  address_not?: Maybe<String>;
+  address_in?: Maybe<String[] | String>;
+  address_not_in?: Maybe<String[] | String>;
+  address_lt?: Maybe<String>;
+  address_lte?: Maybe<String>;
+  address_gt?: Maybe<String>;
+  address_gte?: Maybe<String>;
+  address_contains?: Maybe<String>;
+  address_not_contains?: Maybe<String>;
+  address_starts_with?: Maybe<String>;
+  address_not_starts_with?: Maybe<String>;
+  address_ends_with?: Maybe<String>;
+  address_not_ends_with?: Maybe<String>;
   visitDatetime?: Maybe<DateTimeInput>;
   visitDatetime_not?: Maybe<DateTimeInput>;
   visitDatetime_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -176,6 +192,7 @@ export interface VisitFormWhereInput {
 export interface VisitFormCreateInput {
   id?: Maybe<ID_Input>;
   clientName: String;
+  address: String;
   visitDatetime: DateTimeInput;
   outcomeIndex: Int;
   ableToMakeDecisions?: Maybe<Boolean>;
@@ -184,6 +201,7 @@ export interface VisitFormCreateInput {
 
 export interface VisitFormUpdateInput {
   clientName?: Maybe<String>;
+  address?: Maybe<String>;
   visitDatetime?: Maybe<DateTimeInput>;
   outcomeIndex?: Maybe<Int>;
   ableToMakeDecisions?: Maybe<Boolean>;
@@ -192,6 +210,7 @@ export interface VisitFormUpdateInput {
 
 export interface VisitFormUpdateManyMutationInput {
   clientName?: Maybe<String>;
+  address?: Maybe<String>;
   visitDatetime?: Maybe<DateTimeInput>;
   outcomeIndex?: Maybe<Int>;
   ableToMakeDecisions?: Maybe<Boolean>;
@@ -216,6 +235,7 @@ export interface NodeNode {
 export interface VisitForm {
   id: ID_Output;
   clientName: String;
+  address: String;
   visitDatetime: DateTimeOutput;
   outcomeIndex: Int;
   ableToMakeDecisions: Boolean;
@@ -225,6 +245,7 @@ export interface VisitForm {
 export interface VisitFormPromise extends Promise<VisitForm>, Fragmentable {
   id: () => Promise<ID_Output>;
   clientName: () => Promise<String>;
+  address: () => Promise<String>;
   visitDatetime: () => Promise<DateTimeOutput>;
   outcomeIndex: () => Promise<Int>;
   ableToMakeDecisions: () => Promise<Boolean>;
@@ -236,6 +257,7 @@ export interface VisitFormSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   clientName: () => Promise<AsyncIterator<String>>;
+  address: () => Promise<AsyncIterator<String>>;
   visitDatetime: () => Promise<AsyncIterator<DateTimeOutput>>;
   outcomeIndex: () => Promise<AsyncIterator<Int>>;
   ableToMakeDecisions: () => Promise<AsyncIterator<Boolean>>;
@@ -247,6 +269,7 @@ export interface VisitFormNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   clientName: () => Promise<String>;
+  address: () => Promise<String>;
   visitDatetime: () => Promise<DateTimeOutput>;
   outcomeIndex: () => Promise<Int>;
   ableToMakeDecisions: () => Promise<Boolean>;
@@ -376,6 +399,7 @@ export interface VisitFormSubscriptionPayloadSubscription
 export interface VisitFormPreviousValues {
   id: ID_Output;
   clientName: String;
+  address: String;
   visitDatetime: DateTimeOutput;
   outcomeIndex: Int;
   ableToMakeDecisions: Boolean;
@@ -387,6 +411,7 @@ export interface VisitFormPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   clientName: () => Promise<String>;
+  address: () => Promise<String>;
   visitDatetime: () => Promise<DateTimeOutput>;
   outcomeIndex: () => Promise<Int>;
   ableToMakeDecisions: () => Promise<Boolean>;
@@ -398,6 +423,7 @@ export interface VisitFormPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   clientName: () => Promise<AsyncIterator<String>>;
+  address: () => Promise<AsyncIterator<String>>;
   visitDatetime: () => Promise<AsyncIterator<DateTimeOutput>>;
   outcomeIndex: () => Promise<AsyncIterator<Int>>;
   ableToMakeDecisions: () => Promise<AsyncIterator<Boolean>>;
