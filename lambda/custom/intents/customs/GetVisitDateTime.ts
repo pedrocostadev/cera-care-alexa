@@ -44,6 +44,7 @@ export const GetVisitDateTime: RequestHandler = {
             return handlerInput
                 .responseBuilder
                 .speak(speechText)
+                .withShouldEndSession(false)
                 .getResponse();
 
         } catch (e) {
