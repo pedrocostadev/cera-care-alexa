@@ -1,0 +1,1 @@
+export const getAPLPath = () => __dirname;

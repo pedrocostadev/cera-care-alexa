@@ -36,9 +36,9 @@
                         }
                     ],
                     "samples": [
-                        "{ClientAddressSlot}",
-                        "i'm at {ClientAddressSlot}",
-                        "i'm in {ClientNameSlot} house at {ClientAddressSlot}",
+                        "on {ClientAddressSlot}",
+                        "i'm on {ClientAddressSlot}",
+                        "i'm in {ClientNameSlot} house on {ClientAddressSlot}",
                         "i'm in {ClientNameSlot} house"
                     ]
                 },
@@ -59,9 +59,12 @@
                         }
                     ],
                     "samples": [
-                        "{VisitTimeSlot}",
+                        "at {VisitTimeSlot}",
                         "{VisitWordSlot} {VisitDateSlot}",
-                        "{VisitWordSlot} {VisitDateSlot} at {VisitTimeSlot}"
+                        "{VisitWordSlot} {VisitDateSlot} at {VisitTimeSlot}",
+                        "{VisitWordSlot} on {VisitDateSlot}",
+                        "{VisitWordSlot} on {VisitDateSlot} at {VisitTimeSlot}",
+                        "{VisitWordSlot} on {VisitDateSlot} at {VisitTimeSlot}"
                     ]
                 },
                 {
@@ -91,7 +94,11 @@
                                     "add visit",
                                     "create visit",
                                     "visit",
-                                    "new visit"
+                                    "new visit",
+                                    "will happens",
+                                    "will occurs",
+                                    "should happens",
+                                    "should occurs"
                                 ]
                             }
                         }

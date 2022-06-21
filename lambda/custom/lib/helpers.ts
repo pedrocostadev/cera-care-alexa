@@ -57,6 +57,12 @@ function getSessionAttributes(handlerInput: HandlerInput): SessionAttributes {
     return handlerInput.attributesManager.getSessionAttributes() as SessionAttributes;
 }
 
+function setSessionAttributes(handlerInput: HandlerInput, attribute: any) {
+    const sessionAttribute = skillHelpers.getSessionAttributes(handlerInput);
+    const mergedObject = _.merge(sessionAttribute, attribute);
+    handlerInput.attributesManager.setSessionAttributes(mergedObject);
+}
+
 /**
  * Get an attribute by name if exists.
  * @param handlerInput the handler input
@@ -254,6 +260,7 @@ export const skillHelpers = {
     isIntentWithDialogState,
     getRequestAttributes,
     getSessionAttributes,
+    setSessionAttributes,
     getSessionAttributesByName,
     getDirectiveServiceClient,
     getSlotValues,

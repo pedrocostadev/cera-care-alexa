@@ -4,12 +4,12 @@ import _ from 'lodash';
 import { aplHelpers } from '../../../custom/apl';
 import { AttributesSession, IntentTypes, skillHelpers, SlotsTypes, Strings } from '../../lib';
 
-export const GetClientName: RequestHandler = {
+export const AddOutcome: RequestHandler = {
     canHandle(handlerInput) {
-        return skillHelpers.isIntent(handlerInput, IntentTypes.GetClientNameIntent);
+        return skillHelpers.isIntent(handlerInput, IntentTypes.AddOutcomeIntent);
     },
     handle(handlerInput) {
-        let speechText: string;
+        let speechText = "";
         let clientData: { name: string, address: string };
 
         const { tr } = skillHelpers.getRequestAttributes(handlerInput);
@@ -23,7 +23,7 @@ export const GetClientName: RequestHandler = {
                     name: slots[SlotsTypes.ClientNameSlot].value
                 };
 
-                speechText = setVisitOrOutcome(handlerInput);
+                speechText = setClientOrOutcome(handlerInput);
                 break;
             case !_.isEmpty(slots[SlotsTypes.ClientAddressSlot].value) && _.isEmpty(slots[SlotsTypes.ClientNameSlot].value):
                 clientData = {
@@ -47,7 +47,7 @@ export const GetClientName: RequestHandler = {
                     name: slots[SlotsTypes.ClientNameSlot].value
                 };
 
-                speechText = setVisitOrOutcome(handlerInput);
+                speechText = setClientOrOutcome(handlerInput);
                 break;
             case _.isEmpty(slots[SlotsTypes.ClientAddressSlot].value) && !_.isEmpty(attribute.name):
                 clientData = {
@@ -55,7 +55,7 @@ export const GetClientName: RequestHandler = {
                     name: slots[SlotsTypes.ClientNameSlot].value
                 };
 
-                speechText = setVisitOrOutcome(handlerInput);
+                speechText = setClientOrOutcome(handlerInput);
                 break;
             default:
                 speechText = tr(Strings.ERROR_UNEXPECTED_MSG);
@@ -70,9 +70,9 @@ export const GetClientName: RequestHandler = {
     }
 };
 
-function setVisitOrOutcome(handlerInput: HandlerInput): string {
+function setClientOrOutcome(handlerInput: HandlerInput): string {
     const { tr } = skillHelpers.getRequestAttributes(handlerInput);
-    const attribute = skillHelpers.getSessionAttributesByName(handlerInput, AttributesSession.VisitDateTime);
+    const attribute = skillHelpers.getSessionAttributesByName(handlerInput, AttributesSession.ClientData);
 
     if (_.isEmpty(attribute)) {
         return tr(Strings.ASK_VISIT_MSG);

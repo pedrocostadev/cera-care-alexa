@@ -7,15 +7,29 @@
         "Welcome to the Zé Skill, you can say 'Add new visit'",
         "Welcome this is Zé Skill, you can say 'I'm in some client's house'"
     ],
-    "GOODBYE_MSG": "Goodbye!",
-    "HELLO_MSG": [
-        "Hello world!"
-    ],
+    "GOODBYE_MSG": ["Goodbye!"],
     "ASK_VISIT_TIME_MSG": [
+        "What time the visit should occurs?"
+    ],
+    "ASK_VISIT_DATE_MSG": [
+        "What is the date the visit should occurs?"
+    ],
+    "ASK_CLIENT_MSG": [
+        "What is the client house are you visiting now?",
+        "What is the address house that are you visiting now?"
+    ],
+    "ASK_VISIT_MSG": [
+        "What is the date the visit should occurs?",
         "What time the visit should occurs?"
     ],
     "ASK_CLIENT_NAME_MSG": [
         "What is the client house are you visiting now?"
+    ],
+    "ASK_CLIENT_ADDRESS_MSG": [
+        "What is the address house that are you visiting now?"
+    ],
+    "ASK_OUTCOME_MSG": [
+        "What kind of outcome have you?"
     ],
     "HELP_MSG":[ "You can say hello to me!"],
     "ERROR_MSG": ["Sorry, I can't understand the command. Please say again."],

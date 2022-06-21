@@ -1,0 +1,64 @@
+{
+    "document": {
+        "type": "APL",
+        "version": "1.8",
+        "license": "Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.\nSPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0\nLicensed under the Amazon Software License  http://aws.amazon.com/asl/",
+        "theme": "dark",
+        "import": [
+            {
+                "name": "alexa-layouts",
+                "version": "1.5.0"
+            }
+        ],
+        "mainTemplate": {
+            "parameters": [
+                "payload"
+            ],
+            "items": [
+                {
+                    "type": "AlexaTextList",
+                    "headerTitle": "${payload.textListData.title}",
+                    "headerBackButton": true,
+                    "headerAttributionImage": "${payload.textListData.logoUrl}",
+                    "backgroundImageSource": "${payload.textListData.backgroundImage.sources[0].url}",
+                    "listItems": "${payload.textListData.listItems}",
+                    "touchForward": true,
+                    "id": "outcomeList"
+                }
+            ]
+        }
+    },
+    "datasources": {
+        "textListData": {
+            "type": "object",
+            "objectId": "textListSample",
+            "backgroundImage": {
+                "contentDescription": null,
+                "smallSourceUrl": null,
+                "largeSourceUrl": null,
+                "sources": [
+                    {
+                        "url": "",
+                        "size": "large"
+                    }
+                ]
+            },
+            "title": "List of Outcomes",
+            "listItems": [
+                {
+                    "primaryText": "",
+                    "primaryAction": [
+                        {
+                            "type": "SetValue",
+                            "componentId": "outcomeList",
+                            "property": "headerTitle",
+                            "value": ""
+                        }
+                    ]
+                }
+            ],
+            "logoUrl": ""
+        }
+    },
+    "sources": {}
+}

@@ -17,7 +17,8 @@ export const handler = Alexa.SkillBuilders.custom()
         DefaultIntents.SystemExceptionEncountered,
         DefaultIntents.Fallback,
 
-        // Hello intents
+        // Custom intents
+        CustomIntents.AddOutcome,
         CustomIntents.GetClientName,
         CustomIntents.GetVisitDateTime
     )

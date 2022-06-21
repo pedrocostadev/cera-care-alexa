@@ -1,10 +1,11 @@
-import { RequestHandler } from 'ask-sdk-core';
+import { HandlerInput, RequestHandler } from 'ask-sdk-core';
 
 import { AttributesSession, errorHelper, IntentTypes, skillHelpers, SlotsTypes, Strings } from '../../lib';
 import {
     IntentRequest,
 } from 'ask-sdk-model';
 import _ from 'lodash';
+import { aplHelpers } from '../../apl';
 
 export const GetVisitDateTime: RequestHandler = {
     canHandle(handlerInput) {
@@ -17,6 +18,7 @@ export const GetVisitDateTime: RequestHandler = {
             let visitDateTime: { date: string, time: string };
             let speechText: string = "";
             const slots = skillHelpers.getSlotValues((handlerInput.requestEnvelope.request as IntentRequest).intent.slots);
+            const attribute = skillHelpers.getSessionAttributesByName(handlerInput, AttributesSession.VisitDateTime);
 
             switch (true) {
                 case !_.isEmpty(slots[SlotsTypes.VisitDateSlot].value) && _.isEmpty(slots[SlotsTypes.VisitTimeSlot].value):
@@ -33,13 +35,32 @@ export const GetVisitDateTime: RequestHandler = {
                         time: slots[SlotsTypes.VisitTimeSlot].value
                     };
 
-                    speechText = tr(Strings.ASK_CLIENT_NAME_MSG);
+                    speechText = setClientOrOutcome(handlerInput);
                     break;
+                case !_.isEmpty(attribute.date) && !_.isEmpty(slots[SlotsTypes.VisitTimeSlot].value):
+                    visitDateTime = {
+                        date: attribute.date,
+                        time: slots[SlotsTypes.VisitTimeSlot].value
+                    };
+
+                    speechText = setClientOrOutcome(handlerInput);
+                    break;
+
+                case _.isEmpty(attribute.date) && !_.isEmpty(slots[SlotsTypes.VisitTimeSlot].value):
+                    visitDateTime = {
+                        date: slots[SlotsTypes.VisitDateSlot].value,
+                        time: slots[SlotsTypes.VisitTimeSlot].value
+                    };
+
+                    speechText = setClientOrOutcome(handlerInput);
+                    break;
+
                 default:
+                    speechText = tr(Strings.ERROR_UNEXPECTED_MSG);
                     break;
             }
 
-            handlerInput.attributesManager.setSessionAttributes({ [AttributesSession.VisitDateTime]: visitDateTime });
+            skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.VisitDateTime]: visitDateTime });
 
             return handlerInput
                 .responseBuilder
@@ -53,3 +74,16 @@ export const GetVisitDateTime: RequestHandler = {
         }
     }
 };
+
+function setClientOrOutcome(handlerInput: HandlerInput): string {
+    const { tr } = skillHelpers.getRequestAttributes(handlerInput);
+    const attribute = skillHelpers.getSessionAttributesByName(handlerInput, AttributesSession.ClientData);
+
+    if (_.isEmpty(attribute)) {
+        return tr(Strings.ASK_CLIENT_MSG);
+    }
+
+    aplHelpers.createOutcomeApl(handlerInput);
+
+    return tr(Strings.ASK_OUTCOME_MSG);
+}

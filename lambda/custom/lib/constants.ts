@@ -10,7 +10,7 @@ export enum IntentTypes {
     Stop = "AMAZON.StopIntent",
     Cancel = "AMAZON.CancelIntent",
     Fallback = "AMAZON.FallbackIntent",
-    
+
     // Custom Intents
     GetVisitDateTimeIntent = "GetVisitDateTimeIntent",
     GetClientNameIntent = "GetClientNameIntent",
@@ -22,7 +22,7 @@ export enum ErrorTypes {
     Unexpected = "UnexpectedError",
 }
 
-export enum SlotsTypes{
+export enum SlotsTypes {
     VisitDateSlot = "VisitDateSlot",
     VisitTimeSlot = "VisitTimeSlot",
     ClientAddressSlot = "ClientAddressSlot",
@@ -49,10 +49,14 @@ export enum AttributesSession {
 
 export enum Strings {
     ASK_VISIT_TIME_MSG = "ASK_VISIT_TIME_MSG",
+    ASK_VISIT_DATE_MSG = "ASK_VISIT_DATE_MSG",
+    ASK_OUTCOME_MSG = "ASK_OUTCOME_MSG",
+    ASK_CLIENT_MSG = "ASK_CLIENT_MSG",
+    ASK_VISIT_MSG = "ASK_VISIT_MSG",
     ASK_CLIENT_NAME_MSG = "ASK_CLIENT_NAME_MSG",
+    ASK_CLIENT_ADDRESS_MSG = "ASK_CLIENT_ADDRESS_MSG",
     WELCOME_MSG = "WELCOME_MSG",
     GOODBYE_MSG = "GOODBYE_MSG",
-    HELLO_MSG = "HELLO_MSG",
     HELP_MSG = "HELP_MSG",
     ERROR_MSG = "ERROR_MSG",
     ERROR_UNEXPECTED_MSG = "ERROR_UNEXPECTED_MSG"
@@ -89,3 +93,30 @@ export enum ConsoleColorBg {
     cyan = "\x1b[46m",
     white = "\x1b[47m"
 }
+
+export const OutcomeList = [
+    {
+        id: 0,
+        value: "I enjoy the food and drinks I like and receive the support to eat, drink and stay healthy."
+    },
+    {
+        id: 1,
+        value: "I am supported to move around safely as and when needed."
+    },
+    {
+        id: 2,
+        value: "I receive the personal care and support I need and feel respected and valued."
+    },
+    {
+        id: 3,
+        value: "I receive the care and support I need to support my emotional well-being."
+    },
+    {
+        id: 4,
+        value: "I receive the care and support I need to live well with my longterm conditions."
+    },
+    {
+        id: 5,
+        value: "Other."
+    }
+]
