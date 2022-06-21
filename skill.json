@@ -1,0 +1,131 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-GB": {
+          "summary": "This is a hello world Alexa custom skill.",
+          "examplePhrases": [
+            "Alexa open greeter",
+            "Alexa tell greeter hello",
+            "Alexa ask greeter to say hello"
+          ],
+          "keywords": [
+            "Hello World"
+          ],
+          "name": "Hello World.",
+          "description": "This skill does greetings to world."
+        },
+        "pt-BR": {
+          "summary": "Essa é uma habilidade Alexa olá mundo.",
+          "examplePhrases": [
+            "Alexa abrir saudações",
+            "Alexa diga olá",
+            "Alexa peça para dizer olá"
+          ],
+          "keywords": [
+            "Olá mundo"
+          ],
+          "name": "Hello World.",
+          "description": "This skill does greetings to world."
+        }        
+      },
+      "isAvailableWorldwide": false,
+      "testingInstructions": "1) Say 'Alexa, hello world'",
+      "category": "HEALTH_AND_FITNESS",
+      "distributionCountries": [
+        "GB",
+        "BR"
+      ]
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "https://5a1e-45-182-63-83.sa.ngrok.io"
+        },
+        "interfaces": [
+          {
+            "type": "ALEXA_PRESENTATION_APL"
+          },
+          {
+            "type": "AUDIO_PLAYER"
+          },
+          {
+            "type": "CAN_FULFILL_INTENT_REQUEST"
+          },
+          {
+            "type": "RENDER_TEMPLATE"
+          },
+          {
+            "type": "VIDEO_APP"
+          }
+        ],
+        "regions": {
+          "EU": {
+            "endpoint": {
+              "sslCertificateType": "Trusted",
+              "uri": "https://customapi.sampleskill.com"
+            }
+          }
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "alexa::devices:all:address:full:read"
+      },
+      {
+        "name": "alexa::household:lists:read"
+      },
+      {
+        "name": "alexa::household:lists:write"
+      },
+      {
+        "name": "alexa::alerts:reminders:skill:readwrite"
+      }
+    ],
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "usesPersonalInfo": true,
+      "isChildDirected": false,
+      "isExportCompliant": true,
+      "containsAds": false,
+      "locales": {
+        "en-GB": {
+          "privacyPolicyUrl": "http://www.myprivacypolicy.sampleskill.com",
+          "termsOfUseUrl": "http://www.termsofuse.sampleskill.com"
+        }
+      }
+    },
+    "events": {
+      "endpoint": {
+        "sslCertificateType": "Wildcard",
+        "uri": "https://5a1e-45-182-63-83.sa.ngrok.io"
+      },
+      "subscriptions": [
+        {
+          "eventName": "SKILL_ENABLED"
+        },
+        {
+          "eventName": "SKILL_DISABLED"
+        },
+        {
+          "eventName": "SKILL_PERMISSION_ACCEPTED"
+        },
+        {
+          "eventName": "SKILL_PERMISSION_CHANGED"
+        },
+        {
+          "eventName": "SKILL_ACCOUNT_LINKED"
+        }
+      ],
+      "regions": {
+        "EU": {
+          "endpoint": {
+            "uri": "https://5a1e-45-182-63-83.sa.ngrok.io"
+          }
+        }
+      }
+    }
+  }
+}
