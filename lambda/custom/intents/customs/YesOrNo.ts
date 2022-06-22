@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { createVisit } from '../../../../prisma/client/create';
 import { VisitForm } from '../../../model/visitForm.model';
 
-import { AttributesSession, IntentTypes, skillHelpers, Strings, OutcomeList, errorHelper } from '../../lib';
+import { AttributesSession, IntentTypes, skillHelpers, Strings, OutcomeList, errorHelper, DecisionStatus } from '../../lib';
 
 export const YesOrNo: RequestHandler = {
     canHandle(handlerInput) {
@@ -18,12 +18,12 @@ export const YesOrNo: RequestHandler = {
             let isYesIntent: boolean = false;
 
             switch (true) {
-                case !_.isNil(attribute[AttributesSession.AbleToMakeDecisions]) && _.isNil(attribute[AttributesSession.SaveForm]):
+                case attribute[AttributesSession.AbleToMakeDecisions] === DecisionStatus.Wait && _.isNil(attribute[AttributesSession.SaveForm]):
                     isYesIntent = skillHelpers.isIntent(handlerInput, IntentTypes.YesIntent);
                     skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.AbleToMakeDecisions]: isYesIntent });
                     speechText = setVisitOrOutcome(handlerInput);
                     break;
-                case !_.isNil(attribute[AttributesSession.CareDecisions]) && _.isNil(attribute[AttributesSession.SaveForm]):
+                case attribute[AttributesSession.CareDecisions] === DecisionStatus.Wait && _.isNil(attribute[AttributesSession.SaveForm]):
                     isYesIntent = skillHelpers.isIntent(handlerInput, IntentTypes.YesIntent);
                     skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.CareDecisions]: isYesIntent });
                     speechText = setVisitOrOutcome(handlerInput);

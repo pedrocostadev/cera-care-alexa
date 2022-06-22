@@ -35,12 +35,12 @@
         "What is the address house that are you visiting now?"
     ],
     "ASK_OUTCOME_MSG": [
-        "What kind of outcome have you? {{outcomes}}"
+        "What kind of outcome have you? Please choose one on the list. {{outcomes}}"
     ],
     "ASK_SAVE_FORM_MSG": [
-        "All question were answered the form could be submitted?"
+        "All question were answered. Could the form be submitted?"
     ],
-    "HELP_MSG":[ "You can say hello to me!"],
+    "HELP_MSG":[ "You can say Add new visit today!"],
     "ERROR_MSG": ["Sorry, I can't understand the command. Please say again."],
     "ERROR_UNEXPECTED_MSG": ["Sorry, an unexpected error has occured. Please try again later."]
 }
