@@ -117,11 +117,6 @@ export const OutcomeList = [
         id: 1,
         value: "I am supported to move around safely as and when needed."
     },
-
-    {
-        id: 2,
-        value: "I receive the care and support I need to support my emotional."
-    },
     {
         id: 3,
         value: "Other."
