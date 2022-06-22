@@ -14,30 +14,31 @@ export const YesOrNo: RequestHandler = {
             let speechText: string;
 
             const { tr } = skillHelpers.getRequestAttributes(handlerInput);
-            const attribute = skillHelpers.getSessionAttributesByName(handlerInput, AttributesSession.VisitDateTime);
+            const attribute = skillHelpers.getSessionAttributes(handlerInput);
             let isYesIntent: boolean = false;
 
             switch (true) {
-                case !_.isEmpty(attribute[AttributesSession.AbleToMakeDecisions]):
+                case !_.isNil(attribute[AttributesSession.AbleToMakeDecisions]) && _.isNil(attribute[AttributesSession.SaveForm]):
                     isYesIntent = skillHelpers.isIntent(handlerInput, IntentTypes.YesIntent);
                     skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.AbleToMakeDecisions]: isYesIntent });
                     speechText = setVisitOrOutcome(handlerInput);
                     break;
-                case !_.isEmpty(attribute[AttributesSession.CareDecisions]):
+                case !_.isNil(attribute[AttributesSession.CareDecisions]) && _.isNil(attribute[AttributesSession.SaveForm]):
                     isYesIntent = skillHelpers.isIntent(handlerInput, IntentTypes.YesIntent);
                     skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.CareDecisions]: isYesIntent });
                     speechText = setVisitOrOutcome(handlerInput);
                     break;
-                case !_.isEmpty(attribute[AttributesSession.SaveForm]) && attribute[AttributesSession.SaveForm]:
+                case !_.isNil(attribute[AttributesSession.SaveForm]) && attribute[AttributesSession.SaveForm]:
                     isYesIntent = skillHelpers.isIntent(handlerInput, IntentTypes.YesIntent);
                     if (!isYesIntent) {
+                        speechText = setVisitOrOutcome(handlerInput);
                         break;
                     }
-                    const client = attribute[AttributesSession.ClientData].value;
-                    const visit = attribute[AttributesSession.VisitDateTime].value;
-                    const outcomeIndex = attribute[AttributesSession.OutcomeIndex].value;
-                    const isAbleToMakeDecisions = attribute[AttributesSession.AbleToMakeDecisions].value;
-                    const careDecisions = attribute[AttributesSession.CareDecisions].value;
+                    const client = attribute[AttributesSession.ClientData];
+                    const visit = attribute[AttributesSession.VisitDateTime];
+                    const outcomeIndex = attribute[AttributesSession.OutcomeIndex];
+                    const isAbleToMakeDecisions = attribute[AttributesSession.AbleToMakeDecisions];
+                    const careDecisions = attribute[AttributesSession.CareDecisions];
                     const timestamp = Date.parse(`${visit.date} ${visit.time}`);
                     const visitForm: VisitForm = {
                         clientName: client.name,
@@ -80,14 +81,14 @@ function setVisitOrOutcome(handlerInput: HandlerInput): string {
             return tr(Strings.ASK_VISIT_MSG);
         case _.isEmpty(attribute[AttributesSession.ClientData]):
             return tr(Strings.ASK_CLIENT_MSG);
-        case _.isEmpty(attribute[AttributesSession.OutcomeIndex]):
+        case _.isNil(attribute[AttributesSession.OutcomeIndex]):
             const outcomes = OutcomeList.map(outcome => outcome.value).join(`<break time="1s"/>`);
             let speechText = tr(Strings.ASK_OUTCOME_MSG);
             return speechText.replace("{{outcomes}}", outcomes);
-        case !_.isEmpty(attribute[AttributesSession.OutcomeIndex]) &&
+        case !_.isNil(attribute[AttributesSession.OutcomeIndex]) &&
             !_.isEmpty(attribute[AttributesSession.ClientData]) &&
-            !_.isEmpty(attribute[AttributesSession.CareDecisions]) &&
-            !_.isEmpty(attribute[AttributesSession.AbleToMakeDecisions]) &&
+            !_.isNil(attribute[AttributesSession.CareDecisions]) &&
+            !_.isNil(attribute[AttributesSession.AbleToMakeDecisions]) &&
             !_.isEmpty(attribute[AttributesSession.VisitDateTime]):
             skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.SaveForm]: true });
             return tr(Strings.ASK_SAVE_FORM_MSG);

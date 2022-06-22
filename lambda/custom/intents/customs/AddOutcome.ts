@@ -5,8 +5,7 @@ import { AttributesSession, DecisionStatus, IntentTypes, OutcomeList, skillHelpe
 
 export const AddOutcome: RequestHandler = {
     canHandle(handlerInput) {
-        const result = skillHelpers.isIntent(handlerInput, IntentTypes.AddOutcomeIntent, IntentTypes.SelectIntent);
-        return result;
+        return skillHelpers.isIntent(handlerInput, IntentTypes.AddOutcomeIntent, IntentTypes.SelectIntent);
     },
     handle(handlerInput) {
         let speechText = "";
@@ -63,16 +62,16 @@ function setFlowBasedOnAttributes(handlerInput: HandlerInput): string {
             return tr(Strings.ASK_VISIT_MSG);
         case _.isEmpty(attribute[AttributesSession.ClientData]):
             return tr(Strings.ASK_CLIENT_MSG);
-        case _.isEmpty(attribute[AttributesSession.AbleToMakeDecisions]):
+        case _.isNil(attribute[AttributesSession.AbleToMakeDecisions]):
             skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.AbleToMakeDecisions]: DecisionStatus.Wait });
             return tr(Strings.ASK_IF_IS_ABLE_TO_MAKE_DECISIONS_MSG);
-        case _.isEmpty(attribute[AttributesSession.CareDecisions]):
+        case _.isNil(attribute[AttributesSession.CareDecisions]):
             skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.CareDecisions]: DecisionStatus.Wait });
             return tr(Strings.ASK_CARE_DECISIONS_MSG);
-        case !_.isEmpty(attribute[AttributesSession.OutcomeIndex]) &&
+        case !_.isNil(attribute[AttributesSession.OutcomeIndex]) &&
             !_.isEmpty(attribute[AttributesSession.ClientData]) &&
-            !_.isEmpty(attribute[AttributesSession.CareDecisions]) &&
-            !_.isEmpty(attribute[AttributesSession.AbleToMakeDecisions]) &&
+            !_.isNil(attribute[AttributesSession.CareDecisions]) &&
+            !_.isNil(attribute[AttributesSession.AbleToMakeDecisions]) &&
             !_.isEmpty(attribute[AttributesSession.VisitDateTime]):
             skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.SaveForm]: true });
             return tr(Strings.ASK_SAVE_FORM_MSG);

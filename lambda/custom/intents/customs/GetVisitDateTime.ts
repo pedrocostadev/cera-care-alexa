@@ -8,8 +8,7 @@ import _ from 'lodash';
 
 export const GetVisitDateTime: RequestHandler = {
     canHandle(handlerInput) {
-        const result = skillHelpers.isIntent(handlerInput, IntentTypes.GetVisitDateTimeIntent);
-        return result;
+        return skillHelpers.isIntent(handlerInput, IntentTypes.GetVisitDateTimeIntent);
     },
     handle(handlerInput) {
         try {
@@ -92,10 +91,10 @@ function setClientOrOutcome(handlerInput: HandlerInput): string {
             const outcomes = OutcomeList.map(outcome => outcome.value).join(`<break time="1s"/>`);
             let speechText = tr(Strings.ASK_OUTCOME_MSG);
             return speechText.replace("{{outcomes}}", outcomes);
-        case !_.isEmpty(attribute[AttributesSession.OutcomeIndex]) &&
+            case !_.isNil(attribute[AttributesSession.OutcomeIndex]) &&
             !_.isEmpty(attribute[AttributesSession.ClientData]) &&
-            !_.isEmpty(attribute[AttributesSession.CareDecisions]) &&
-            !_.isEmpty(attribute[AttributesSession.AbleToMakeDecisions]) &&
+            !_.isNil(attribute[AttributesSession.CareDecisions]) &&
+            !_.isNil(attribute[AttributesSession.AbleToMakeDecisions]) &&
             !_.isEmpty(attribute[AttributesSession.VisitDateTime]):
             skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.SaveForm]: true });
             return tr(Strings.ASK_SAVE_FORM_MSG);
