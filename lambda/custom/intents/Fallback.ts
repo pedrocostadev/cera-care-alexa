@@ -7,9 +7,9 @@ export const Fallback: RequestHandler = {
         return skillHelpers.isIntent(handlerInput, IntentTypes.Fallback);
     },
     handle(handlerInput) {
-        const { t } = skillHelpers.getRequestAttributes(handlerInput);
+        const { tr } = skillHelpers.getRequestAttributes(handlerInput);
 
-        const speechText = t(Strings.ERROR_MSG);
+        const speechText = tr(Strings.ERROR_MSG);
 
         return handlerInput.responseBuilder
             .speak(speechText)

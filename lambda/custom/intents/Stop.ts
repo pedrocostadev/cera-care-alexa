@@ -7,12 +7,13 @@ export const Stop: RequestHandler = {
         return skillHelpers.isIntent(handlerInput, IntentTypes.Stop, IntentTypes.Cancel);
     },
     handle(handlerInput) {
-        const { t } = skillHelpers.getRequestAttributes(handlerInput);
+        const { tr } = skillHelpers.getRequestAttributes(handlerInput);
 
-        const speechText = t(Strings.GOODBYE_MSG);
+        const speechText = tr(Strings.GOODBYE_MSG);
 
         return handlerInput.responseBuilder
             .speak(speechText)
+            .withShouldEndSession(true)
             .getResponse();
     }
 };

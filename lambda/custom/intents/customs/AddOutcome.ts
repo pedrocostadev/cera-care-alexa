@@ -34,7 +34,7 @@ export const AddOutcome: RequestHandler = {
                 }
 
                 if (!_.isEmpty(slots[SlotsTypes.ListPositionSlot].value)) {
-                    index = slots[SlotsTypes.PositionRelationSlot].value as unknown as number;
+                    index = slots[SlotsTypes.ListPositionSlot].value as unknown as number;
                 }
 
                 skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.OutcomeIndex]: index });
