@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "fill cera form",
+            "invocationName": "ze skill",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -98,6 +98,10 @@
                 },
                 {
                     "name": "AMAZON.YesIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.SelectIntent",
                     "samples": []
                 }
             ],

@@ -12,7 +12,8 @@ export enum IntentTypes {
     Fallback = "AMAZON.FallbackIntent",
     YesIntent = "AMAZON.YesIntent",
     NoIntent = "AMAZON.NoIntent",
-    
+    SelectIntent = "AMAZON.SelectIntent",
+
     // Custom Intents
     GetVisitDateTimeIntent = "GetVisitDateTimeIntent",
     GetClientNameIntent = "GetClientNameIntent",
@@ -28,7 +29,9 @@ export enum SlotsTypes {
     VisitDateSlot = "VisitDateSlot",
     VisitTimeSlot = "VisitTimeSlot",
     ClientAddressSlot = "ClientAddressSlot",
-    ClientNameSlot = "ClientNameSlot"
+    ClientNameSlot = "ClientNameSlot",
+    ListPositionSlot = "ListPosition",
+    PositionRelationSlot = "PositionRelation"
 }
 
 export enum LocaleTypes {
@@ -49,7 +52,8 @@ export enum AttributesSession {
     ClientData = "ClientData",
     OutcomeIndex = "OutcomeIndex",
     AbleToMakeDecisions = "AbleToMakeDecisions",
-    CareDecisions = "CareDecisions"
+    CareDecisions = "CareDecisions",
+    SaveForm = "SaveForm"
 }
 
 export enum Strings {
@@ -62,6 +66,7 @@ export enum Strings {
     ASK_CLIENT_ADDRESS_MSG = "ASK_CLIENT_ADDRESS_MSG",
     ASK_IF_IS_ABLE_TO_MAKE_DECISIONS_MSG = "ASK_IF_IS_ABLE_TO_MAKE_DECISIONS_MSG",
     ASK_CARE_DECISIONS_MSG = "ASK_CARE_DECISIONS_MSG",
+    ASK_SAVE_FORM_MSG = "ASK_SAVE_FORM_MSG",
     WELCOME_MSG = "WELCOME_MSG",
     GOODBYE_MSG = "GOODBYE_MSG",
     HELP_MSG = "HELP_MSG",

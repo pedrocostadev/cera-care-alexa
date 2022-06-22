@@ -37,6 +37,9 @@
     "ASK_OUTCOME_MSG": [
         "What kind of outcome have you?"
     ],
+    "ASK_SAVE_FORM_MSG": [
+        "All question were answered the form could be submitted?"
+    ],
     "HELP_MSG":[ "You can say hello to me!"],
     "ERROR_MSG": ["Sorry, I can't understand the command. Please say again."],
     "ERROR_UNEXPECTED_MSG": ["Sorry, an unexpected error has occured. Please try again later."]

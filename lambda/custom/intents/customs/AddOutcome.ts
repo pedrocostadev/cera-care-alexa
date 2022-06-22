@@ -2,60 +2,43 @@ import { HandlerInput, RequestHandler } from 'ask-sdk-core';
 import { IntentRequest } from 'ask-sdk-model';
 import _ from 'lodash';
 import { aplHelpers } from '../../../custom/apl';
-import { AttributesSession, DecisionStatus, IntentTypes, skillHelpers, SlotsTypes, Strings } from '../../lib';
+import { AttributesSession, DecisionStatus, IntentTypes, OutcomeList, skillHelpers, SlotsTypes, Strings } from '../../lib';
 
 export const AddOutcome: RequestHandler = {
     canHandle(handlerInput) {
-        return skillHelpers.isIntent(handlerInput, IntentTypes.AddOutcomeIntent);
+        return skillHelpers.isIntent(handlerInput, IntentTypes.AddOutcomeIntent, IntentTypes.SelectIntent);
     },
     handle(handlerInput) {
         let speechText = "";
         let clientData: { name: string, address: string };
 
         const { tr } = skillHelpers.getRequestAttributes(handlerInput);
-        const attribute = skillHelpers.getSessionAttributesByName(handlerInput, AttributesSession.VisitDateTime);
-        const slots = skillHelpers.getSlotValues((handlerInput.requestEnvelope.request as IntentRequest).intent.slots);
 
         switch (true) {
-            case !_.isEmpty(slots[SlotsTypes.ClientAddressSlot].value) && !_.isEmpty(slots[SlotsTypes.ClientNameSlot].value):
-                clientData = {
-                    address: slots[SlotsTypes.ClientAddressSlot].value,
-                    name: slots[SlotsTypes.ClientNameSlot].value
-                };
+            case skillHelpers.isIntent(handlerInput, IntentTypes.AddOutcomeIntent):
+                aplHelpers.createOutcomeApl(handlerInput);
 
-                speechText = setClientOrOutcome(handlerInput);
+                speechText = tr(Strings.ASK_OUTCOME_MSG);
                 break;
-            case !_.isEmpty(slots[SlotsTypes.ClientAddressSlot].value) && _.isEmpty(slots[SlotsTypes.ClientNameSlot].value):
-                clientData = {
-                    address: slots[SlotsTypes.ClientAddressSlot].value,
-                    name: slots[SlotsTypes.ClientNameSlot].value
-                };
+            case skillHelpers.isIntent(handlerInput, IntentTypes.SelectIntent):
+                const slots = skillHelpers.getSlotValues((handlerInput.requestEnvelope.request as IntentRequest).intent.slots);
+                let index = 0;
 
-                speechText = tr(Strings.ASK_CLIENT_NAME_MSG);
-                break;
-            case _.isEmpty(slots[SlotsTypes.ClientAddressSlot].value) && !_.isEmpty(slots[SlotsTypes.ClientNameSlot].value):
-                clientData = {
-                    address: slots[SlotsTypes.ClientAddressSlot].value,
-                    name: slots[SlotsTypes.ClientNameSlot].value
-                };
+                if (!_.isEmpty(slots[SlotsTypes.PositionRelationSlot].value)) {
+                    const positionRelated = slots[SlotsTypes.PositionRelationSlot].value
+                    if (positionRelated === "Top") {
+                        index = OutcomeList.at(0).id;
+                    } else {
+                        index = OutcomeList.at(OutcomeList.length).id;
+                    }
+                }
 
-                speechText = tr(Strings.ASK_CLIENT_ADDRESS_MSG);
-                break;
-            case !_.isEmpty(attribute.address) && _.isEmpty(slots[SlotsTypes.ClientNameSlot].value):
-                clientData = {
-                    address: slots[SlotsTypes.ClientAddressSlot].value,
-                    name: slots[SlotsTypes.ClientNameSlot].value
-                };
+                if (!_.isEmpty(slots[SlotsTypes.ListPositionSlot].value)) {
+                    index = slots[SlotsTypes.PositionRelationSlot].value as unknown as number;
+                }
 
-                speechText = setClientOrOutcome(handlerInput);
-                break;
-            case _.isEmpty(slots[SlotsTypes.ClientAddressSlot].value) && !_.isEmpty(attribute.name):
-                clientData = {
-                    address: slots[SlotsTypes.ClientAddressSlot].value,
-                    name: slots[SlotsTypes.ClientNameSlot].value
-                };
-
-                speechText = setClientOrOutcome(handlerInput);
+                skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.OutcomeIndex]: index });
+                speechText = setFlowBasedOnAttributes(handlerInput);
                 break;
             default:
                 speechText = tr(Strings.ERROR_UNEXPECTED_MSG);
@@ -70,20 +53,29 @@ export const AddOutcome: RequestHandler = {
     }
 };
 
-function setClientOrOutcome(handlerInput: HandlerInput): string {
+function setFlowBasedOnAttributes(handlerInput: HandlerInput): string {
     const { tr } = skillHelpers.getRequestAttributes(handlerInput);
-    const attribute = skillHelpers.getSessionAttributesByName(handlerInput, AttributesSession.ClientData);
+    const attribute = skillHelpers.getSessionAttributes(handlerInput);
 
     switch (true) {
-        case _.isEmpty(attribute[AttributesSession.VisitDateTime].value):
+        case _.isEmpty(attribute[AttributesSession.VisitDateTime]):
             return tr(Strings.ASK_VISIT_MSG);
-        case _.isEmpty(attribute[AttributesSession.ClientData].value):
+        case _.isEmpty(attribute[AttributesSession.ClientData]):
             return tr(Strings.ASK_CLIENT_MSG);
-        case _.isEmpty(attribute[AttributesSession.AbleToMakeDecisions].value):
+        case _.isEmpty(attribute[AttributesSession.AbleToMakeDecisions]):
             skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.AbleToMakeDecisions]: DecisionStatus.Wait });
             return tr(Strings.ASK_IF_IS_ABLE_TO_MAKE_DECISIONS_MSG);
-        case _.isEmpty(attribute[AttributesSession.CareDecisions].value):
+        case _.isEmpty(attribute[AttributesSession.CareDecisions]):
             skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.CareDecisions]: DecisionStatus.Wait });
             return tr(Strings.ASK_CARE_DECISIONS_MSG);
+        case !_.isEmpty(attribute[AttributesSession.OutcomeIndex]) &&
+            !_.isEmpty(attribute[AttributesSession.ClientData]) &&
+            !_.isEmpty(attribute[AttributesSession.CareDecisions]) &&
+            !_.isEmpty(attribute[AttributesSession.AbleToMakeDecisions]) &&
+            !_.isEmpty(attribute[AttributesSession.VisitDateTime]):
+            skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.SaveForm]: true });
+            return tr(Strings.ASK_SAVE_FORM_MSG);
+        default:
+            return tr(Strings.ERROR_UNEXPECTED_MSG);
     }
 }

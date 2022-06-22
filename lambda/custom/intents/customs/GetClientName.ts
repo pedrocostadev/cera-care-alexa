@@ -72,20 +72,29 @@ export const GetClientName: RequestHandler = {
 
 function setVisitOrOutcome(handlerInput: HandlerInput): string {
     const { tr } = skillHelpers.getRequestAttributes(handlerInput);
-    const attribute = skillHelpers.getSessionAttributesByName(handlerInput, AttributesSession.VisitDateTime);
+    const attribute = skillHelpers.getSessionAttributes(handlerInput);
 
     switch (true) {
-        case _.isEmpty(attribute[AttributesSession.VisitDateTime].value):
+        case _.isEmpty(attribute[AttributesSession.VisitDateTime]):
             return tr(Strings.ASK_VISIT_MSG);
-        case _.isEmpty(attribute[AttributesSession.AbleToMakeDecisions].value):
+        case _.isEmpty(attribute[AttributesSession.AbleToMakeDecisions]):
             skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.AbleToMakeDecisions]: DecisionStatus.Wait });
             return tr(Strings.ASK_IF_IS_ABLE_TO_MAKE_DECISIONS_MSG);
-        case _.isEmpty(attribute[AttributesSession.CareDecisions].value):
+        case _.isEmpty(attribute[AttributesSession.CareDecisions]):
             skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.CareDecisions]: DecisionStatus.Wait });
             return tr(Strings.ASK_CARE_DECISIONS_MSG);
-        case _.isEmpty(attribute[AttributesSession.OutcomeIndex].value):
+        case _.isEmpty(attribute[AttributesSession.OutcomeIndex]):
             aplHelpers.createOutcomeApl(handlerInput);
 
             return tr(Strings.ASK_OUTCOME_MSG);
+        case !_.isEmpty(attribute[AttributesSession.OutcomeIndex]) &&
+            !_.isEmpty(attribute[AttributesSession.ClientData]) &&
+            !_.isEmpty(attribute[AttributesSession.CareDecisions]) &&
+            !_.isEmpty(attribute[AttributesSession.AbleToMakeDecisions]) &&
+            !_.isEmpty(attribute[AttributesSession.VisitDateTime]):
+            skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.SaveForm]: true });
+            return tr(Strings.ASK_SAVE_FORM_MSG);
+        default:
+            return tr(Strings.ERROR_UNEXPECTED_MSG);
     }
 }
