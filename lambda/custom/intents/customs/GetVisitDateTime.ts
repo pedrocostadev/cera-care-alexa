@@ -1,15 +1,15 @@
 import { HandlerInput, RequestHandler } from 'ask-sdk-core';
 
-import { AttributesSession, DecisionStatus, errorHelper, IntentTypes, skillHelpers, SlotsTypes, Strings } from '../../lib';
+import { AttributesSession, DecisionStatus, errorHelper, IntentTypes, OutcomeList, skillHelpers, SlotsTypes, Strings } from '../../lib';
 import {
     IntentRequest,
 } from 'ask-sdk-model';
 import _ from 'lodash';
-import { aplHelpers } from '../../apl';
 
 export const GetVisitDateTime: RequestHandler = {
     canHandle(handlerInput) {
-        return skillHelpers.isIntent(handlerInput, IntentTypes.GetVisitDateTimeIntent);
+        const result = skillHelpers.isIntent(handlerInput, IntentTypes.GetVisitDateTimeIntent);
+        return result;
     },
     handle(handlerInput) {
         try {
@@ -89,9 +89,9 @@ function setClientOrOutcome(handlerInput: HandlerInput): string {
             skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.CareDecisions]: DecisionStatus.Wait });
             return tr(Strings.ASK_CARE_DECISIONS_MSG);
         case _.isEmpty(attribute[AttributesSession.OutcomeIndex]):
-            aplHelpers.createOutcomeApl(handlerInput);
-
-            return tr(Strings.ASK_OUTCOME_MSG);
+            const outcomes = OutcomeList.map(outcome => outcome.value).join(`<break time="1s"/>`);
+            let speechText = tr(Strings.ASK_OUTCOME_MSG);
+            return speechText.replace("{{outcomes}}", outcomes);
         case !_.isEmpty(attribute[AttributesSession.OutcomeIndex]) &&
             !_.isEmpty(attribute[AttributesSession.ClientData]) &&
             !_.isEmpty(attribute[AttributesSession.CareDecisions]) &&

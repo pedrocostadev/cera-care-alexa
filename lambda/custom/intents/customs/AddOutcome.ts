@@ -1,12 +1,12 @@
 import { HandlerInput, RequestHandler } from 'ask-sdk-core';
 import { IntentRequest } from 'ask-sdk-model';
 import _ from 'lodash';
-import { aplHelpers } from '../../../custom/apl';
 import { AttributesSession, DecisionStatus, IntentTypes, OutcomeList, skillHelpers, SlotsTypes, Strings } from '../../lib';
 
 export const AddOutcome: RequestHandler = {
     canHandle(handlerInput) {
-        return skillHelpers.isIntent(handlerInput, IntentTypes.AddOutcomeIntent, IntentTypes.SelectIntent);
+        const result = skillHelpers.isIntent(handlerInput, IntentTypes.AddOutcomeIntent, IntentTypes.SelectIntent);
+        return result;
     },
     handle(handlerInput) {
         let speechText = "";
@@ -16,9 +16,10 @@ export const AddOutcome: RequestHandler = {
 
         switch (true) {
             case skillHelpers.isIntent(handlerInput, IntentTypes.AddOutcomeIntent):
-                aplHelpers.createOutcomeApl(handlerInput);
-
+                const outcomes = OutcomeList.map(outcome => outcome.value).join(`<break time="1s"/>`);
                 speechText = tr(Strings.ASK_OUTCOME_MSG);
+                speechText = speechText.replace("{{outcomes}}", outcomes);
+
                 break;
             case skillHelpers.isIntent(handlerInput, IntentTypes.SelectIntent):
                 const slots = skillHelpers.getSlotValues((handlerInput.requestEnvelope.request as IntentRequest).intent.slots);

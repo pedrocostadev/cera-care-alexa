@@ -35,7 +35,7 @@
         "What is the address house that are you visiting now?"
     ],
     "ASK_OUTCOME_MSG": [
-        "What kind of outcome have you?"
+        "What kind of outcome have you? {{outcomes}}"
     ],
     "ASK_SAVE_FORM_MSG": [
         "All question were answered the form could be submitted?"

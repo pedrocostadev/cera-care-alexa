@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "ze skill",
+            "invocationName": "client visit",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -59,6 +59,7 @@
                         }
                     ],
                     "samples": [
+                        "{VisitTimeSlot}",
                         "at {VisitTimeSlot}",
                         "create new visit {VisitDateSlot}",
                         "create new visit {VisitDateSlot} at {VisitTimeSlot}",

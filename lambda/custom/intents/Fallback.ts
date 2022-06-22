@@ -13,7 +13,7 @@ export const Fallback: RequestHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(t(Strings.HELP_MSG))
+            .reprompt(tr(Strings.HELP_MSG))
             .getResponse();
     }
 };

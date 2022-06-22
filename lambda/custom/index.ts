@@ -18,6 +18,7 @@ export const handler = Alexa.SkillBuilders.custom()
         DefaultIntents.Fallback,
 
         // Custom intents
+        CustomIntents.YesOrNo,
         CustomIntents.AddOutcome,
         CustomIntents.GetClientName,
         CustomIntents.GetVisitDateTime
