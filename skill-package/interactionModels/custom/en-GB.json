@@ -61,6 +61,7 @@
                         }
                     ],
                     "samples": [
+                        "{VisitDateSlot}",
                         "{VisitTimeSlot}",
                         "at {VisitTimeSlot}",
                         "create new visit {VisitDateSlot}",
