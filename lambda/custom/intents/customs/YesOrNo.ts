@@ -21,17 +21,17 @@ export const YesOrNo: RequestHandler = {
                 case attribute[AttributesSession.AbleToMakeDecisions] === DecisionStatus.Wait && _.isNil(attribute[AttributesSession.SaveForm]):
                     isYesIntent = skillHelpers.isIntent(handlerInput, IntentTypes.YesIntent);
                     skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.AbleToMakeDecisions]: isYesIntent });
-                    speechText = setVisitOrOutcome(handlerInput);
+                    speechText = setFlowBasedOnAttributes(handlerInput);
                     break;
                 case attribute[AttributesSession.CareDecisions] === DecisionStatus.Wait && _.isNil(attribute[AttributesSession.SaveForm]):
                     isYesIntent = skillHelpers.isIntent(handlerInput, IntentTypes.YesIntent);
                     skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.CareDecisions]: isYesIntent });
-                    speechText = setVisitOrOutcome(handlerInput);
+                    speechText = setFlowBasedOnAttributes(handlerInput);
                     break;
                 case !_.isNil(attribute[AttributesSession.SaveForm]) && attribute[AttributesSession.SaveForm]:
                     isYesIntent = skillHelpers.isIntent(handlerInput, IntentTypes.YesIntent);
                     if (!isYesIntent) {
-                        speechText = setVisitOrOutcome(handlerInput);
+                        speechText = setFlowBasedOnAttributes(handlerInput);
                         break;
                     }
                     const client = attribute[AttributesSession.ClientData];
@@ -72,7 +72,7 @@ export const YesOrNo: RequestHandler = {
     }
 };
 
-function setVisitOrOutcome(handlerInput: HandlerInput): string {
+function setFlowBasedOnAttributes(handlerInput: HandlerInput): string {
     const { tr } = skillHelpers.getRequestAttributes(handlerInput);
     const attribute = skillHelpers.getSessionAttributes(handlerInput);
 

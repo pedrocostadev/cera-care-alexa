@@ -20,38 +20,45 @@ export const GetVisitDateTime: RequestHandler = {
             const attribute = skillHelpers.getSessionAttributesByName(handlerInput, AttributesSession.VisitDateTime);
 
             switch (true) {
-                case !_.isEmpty(slots[SlotsTypes.VisitDateSlot].value) && _.isEmpty(slots[SlotsTypes.VisitTimeSlot].value):
-                    visitDateTime = {
-                        date: slots[SlotsTypes.VisitDateSlot].value,
-                        time: ""
-                    };
-                    speechText = tr(Strings.ASK_VISIT_TIME_MSG);
-
-                    break;
                 case !_.isEmpty(slots[SlotsTypes.VisitDateSlot].value) && !_.isEmpty(slots[SlotsTypes.VisitTimeSlot].value):
                     visitDateTime = {
                         date: slots[SlotsTypes.VisitDateSlot].value,
                         time: slots[SlotsTypes.VisitTimeSlot].value
                     };
 
-                    speechText = setClientOrOutcome(handlerInput);
+                    speechText = setFlowBasedOnAttributes(handlerInput);
                     break;
-                case !_.isEmpty(attribute.date) && !_.isEmpty(slots[SlotsTypes.VisitTimeSlot].value):
+                case !_.isEmpty(slots[SlotsTypes.VisitDateSlot].value) && _.isEmpty(slots[SlotsTypes.VisitTimeSlot].value):
+                    if (_.isNil(attribute.time)) {
+                        visitDateTime = {
+                            date: slots[SlotsTypes.VisitDateSlot].value,
+                            time: slots[SlotsTypes.VisitTimeSlot].value
+                        };
+                        speechText = tr(Strings.ASK_VISIT_TIME_MSG);
+                        break;
+                    }
+
+                    visitDateTime = {
+                        date: slots[SlotsTypes.VisitDateSlot].value,
+                        time: attribute.time
+                    };
+                    speechText = setFlowBasedOnAttributes(handlerInput);
+                    break;
+                case _.isEmpty(slots[SlotsTypes.VisitDateSlot].value) && !_.isEmpty(slots[SlotsTypes.VisitTimeSlot].value):
+                    if (_.isNil(attribute.date)) {
+                        visitDateTime = {
+                            date: slots[SlotsTypes.VisitDateSlot].value,
+                            time: slots[SlotsTypes.VisitTimeSlot].value
+                        };
+                        speechText = tr(Strings.ASK_VISIT_DATE_MSG);
+                        break;
+                    }
+
                     visitDateTime = {
                         date: attribute.date,
                         time: slots[SlotsTypes.VisitTimeSlot].value
                     };
-
-                    speechText = setClientOrOutcome(handlerInput);
-                    break;
-
-                case _.isEmpty(attribute.date) && !_.isEmpty(slots[SlotsTypes.VisitTimeSlot].value):
-                    visitDateTime = {
-                        date: slots[SlotsTypes.VisitDateSlot].value,
-                        time: slots[SlotsTypes.VisitTimeSlot].value
-                    };
-
-                    speechText = setClientOrOutcome(handlerInput);
+                    speechText = setFlowBasedOnAttributes(handlerInput);
                     break;
 
                 default:
@@ -74,7 +81,7 @@ export const GetVisitDateTime: RequestHandler = {
     }
 };
 
-function setClientOrOutcome(handlerInput: HandlerInput): string {
+function setFlowBasedOnAttributes(handlerInput: HandlerInput): string {
     const { tr } = skillHelpers.getRequestAttributes(handlerInput);
     const attribute = skillHelpers.getSessionAttributes(handlerInput);
 
@@ -91,7 +98,7 @@ function setClientOrOutcome(handlerInput: HandlerInput): string {
             const outcomes = OutcomeList.map(outcome => outcome.value).join(`<break time="1s"/>`);
             let speechText = tr(Strings.ASK_OUTCOME_MSG);
             return speechText.replace("{{outcomes}}", outcomes);
-            case !_.isNil(attribute[AttributesSession.OutcomeIndex]) &&
+        case !_.isNil(attribute[AttributesSession.OutcomeIndex]) &&
             !_.isEmpty(attribute[AttributesSession.ClientData]) &&
             !_.isNil(attribute[AttributesSession.CareDecisions]) &&
             !_.isNil(attribute[AttributesSession.AbleToMakeDecisions]) &&

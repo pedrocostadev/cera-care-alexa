@@ -26,7 +26,7 @@ export const AddOutcome: RequestHandler = {
 
                 if (!_.isEmpty(slots[SlotsTypes.PositionRelationSlot].value)) {
                     const positionRelated = slots[SlotsTypes.PositionRelationSlot].value
-                    if (positionRelated === "Top") {
+                    if (positionRelated === "top") {
                         index = OutcomeList.at(0).id;
                     } else {
                         index = OutcomeList.at(OutcomeList.length).id;

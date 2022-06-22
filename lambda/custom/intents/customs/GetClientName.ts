@@ -23,7 +23,7 @@ export const GetClientName: RequestHandler = {
                         name: slots[SlotsTypes.ClientNameSlot].value
                     };
 
-                    speechText = setVisitOrOutcome(handlerInput);
+                    speechText = setFlowBasedOnAttributes(handlerInput);
                     break;
                 case !_.isEmpty(slots[SlotsTypes.ClientAddressSlot].value) && _.isEmpty(slots[SlotsTypes.ClientNameSlot].value):
                     if (_.isEmpty(attribute.name)) {
@@ -40,7 +40,7 @@ export const GetClientName: RequestHandler = {
                         name: attribute.name
                     };
 
-                    speechText = setVisitOrOutcome(handlerInput);
+                    speechText = setFlowBasedOnAttributes(handlerInput);
                     break;
                 case _.isEmpty(slots[SlotsTypes.ClientAddressSlot].value) && !_.isEmpty(slots[SlotsTypes.ClientNameSlot].value):
 
@@ -57,17 +57,9 @@ export const GetClientName: RequestHandler = {
                         address: attribute.address,
                         name: slots[SlotsTypes.ClientNameSlot].value
                     };
-                    speechText = setVisitOrOutcome(handlerInput);
+                    speechText = setFlowBasedOnAttributes(handlerInput);
                     break;
 
-                case _.isEmpty(slots[SlotsTypes.ClientAddressSlot].value) && !_.isEmpty(attribute.name):
-                    clientData = {
-                        address: slots[SlotsTypes.ClientAddressSlot].value,
-                        name: attribute.name
-                    };
-
-                    speechText = setVisitOrOutcome(handlerInput);
-                    break;
                 default:
                     speechText = tr(Strings.ERROR_UNEXPECTED_MSG);
                     break;
@@ -77,6 +69,7 @@ export const GetClientName: RequestHandler = {
 
             return handlerInput.responseBuilder
                 .speak(speechText)
+                .withShouldEndSession(false)
                 .getResponse();
         } catch (e) {
             const error = (e as Error);
@@ -85,7 +78,7 @@ export const GetClientName: RequestHandler = {
     }
 };
 
-function setVisitOrOutcome(handlerInput: HandlerInput): string {
+function setFlowBasedOnAttributes(handlerInput: HandlerInput): string {
     const { tr } = skillHelpers.getRequestAttributes(handlerInput);
     const attribute = skillHelpers.getSessionAttributes(handlerInput);
 

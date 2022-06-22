@@ -114,27 +114,16 @@ export enum DecisionStatus {
 
 export const OutcomeList = [
     {
-        id: 0,
-        value: "I enjoy the food and drinks I like and receive the support to eat, drink and stay healthy."
-    },
-    {
         id: 1,
         value: "I am supported to move around safely as and when needed."
     },
+
     {
         id: 2,
-        value: "I receive the personal care and support I need and feel respected and valued."
+        value: "I receive the care and support I need to support my emotional."
     },
     {
         id: 3,
-        value: "I receive the care and support I need to support my emotional well-being."
-    },
-    {
-        id: 4,
-        value: "I receive the care and support I need to live well with my longterm conditions."
-    },
-    {
-        id: 5,
         value: "Other."
     }
 ]
