@@ -114,11 +114,11 @@ export enum DecisionStatus {
 
 export const OutcomeList = [
     {
-        id: 1,
+        id: 0,
         value: "I am supported to move around safely as and when needed."
     },
     {
-        id: 3,
+        id: 1,
         value: "Other."
     }
 ]

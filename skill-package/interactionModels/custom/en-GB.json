@@ -36,10 +36,12 @@
                         }
                     ],
                     "samples": [
+                        "it is {ClientNameSlot}",
+                        "it is {ClientAddressSlot}",
                         "on {ClientAddressSlot}",
-                        "i'm on {ClientAddressSlot}",
-                        "i'm in {ClientNameSlot} house on {ClientAddressSlot}",
-                        "i'm in {ClientNameSlot} house"
+                        "i am on {ClientAddressSlot}",
+                        "i am in {ClientNameSlot} house on {ClientAddressSlot}",
+                        "i m in {ClientNameSlot} house"
                     ]
                 },
                 {

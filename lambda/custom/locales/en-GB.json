@@ -15,15 +15,15 @@
         "What is the date the visit should occurs?"
     ],
     "ASK_CLIENT_MSG": [
-        "What is the client house are you visiting now?",
-        "What is the address house that are you visiting now?"
+        "What is the client house are you visiting?",
+        "What is the address house that are you visiting?"
     ],
     "ASK_VISIT_MSG": [
         "What is the date the visit should occurs?",
         "What is the time the visit should occurs?"
     ],
     "ASK_CLIENT_NAME_MSG": [
-        "What is the client house are you visiting now?"
+        "What is the client house are you visiting?"
     ],
     "ASK_IF_IS_ABLE_TO_MAKE_DECISIONS_MSG": [
         "Are you able to make decisions on all aspect of your life, including financial and welfare decisions?"
@@ -32,7 +32,7 @@
         "Are you able to make day-to-day informal decisions about the care and support?"
     ],
     "ASK_CLIENT_ADDRESS_MSG": [
-        "What is the address house that are you visiting now?"
+        "What is the address house that are you visiting?"
     ],
     "ASK_OUTCOME_MSG": [
         "What kind of outcome have you? Please choose one on the list. {{outcomes}}"
