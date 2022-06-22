@@ -60,11 +60,24 @@
                     ],
                     "samples": [
                         "at {VisitTimeSlot}",
-                        "{VisitWordSlot} {VisitDateSlot}",
-                        "{VisitWordSlot} {VisitDateSlot} at {VisitTimeSlot}",
-                        "{VisitWordSlot} on {VisitDateSlot}",
-                        "{VisitWordSlot} on {VisitDateSlot} at {VisitTimeSlot}",
-                        "{VisitWordSlot} on {VisitDateSlot} at {VisitTimeSlot}"
+                        "create new visit {VisitDateSlot}",
+                        "create new visit {VisitDateSlot} at {VisitTimeSlot}",
+                        "add new visit {VisitDateSlot}",
+                        "add new visit {VisitDateSlot} at {VisitTimeSlot}",
+                        "save visit {VisitDateSlot}",
+                        "save visit {VisitDateSlot} at {VisitTimeSlot}",
+                        "add visit {VisitDateSlot}",
+                        "add visit {VisitDateSlot} at {VisitTimeSlot}",
+                        "new visit {VisitDateSlot}",
+                        "new visit {VisitDateSlot} at {VisitTimeSlot}",
+                        "will happens {VisitDateSlot}",
+                        "will happens {VisitDateSlot} at {VisitTimeSlot}",
+                        "will occurs {VisitDateSlot}",
+                        "will occurs {VisitDateSlot} at {VisitTimeSlot}",
+                        "should happens {VisitDateSlot}",
+                        "should happens {VisitDateSlot} at {VisitTimeSlot}",
+                        "should occurs {VisitDateSlot}",
+                        "should occurs {VisitDateSlot} at {VisitTimeSlot}"
                     ]
                 },
                 {
@@ -78,6 +91,14 @@
                     "samples": [
                         "{OutcomeWordSlot} "
                     ]
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
                 }
             ],
             "types": [
@@ -93,7 +114,6 @@
                                     "save visit",
                                     "add visit",
                                     "create visit",
-                                    "visit",
                                     "new visit",
                                     "will happens",
                                     "will occurs",

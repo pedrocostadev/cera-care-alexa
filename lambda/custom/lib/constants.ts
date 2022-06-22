@@ -10,7 +10,9 @@ export enum IntentTypes {
     Stop = "AMAZON.StopIntent",
     Cancel = "AMAZON.CancelIntent",
     Fallback = "AMAZON.FallbackIntent",
-
+    YesIntent = "AMAZON.YesIntent",
+    NoIntent = "AMAZON.NoIntent",
+    
     // Custom Intents
     GetVisitDateTimeIntent = "GetVisitDateTimeIntent",
     GetClientNameIntent = "GetClientNameIntent",
@@ -44,7 +46,10 @@ export enum LocaleTypes {
 
 export enum AttributesSession {
     VisitDateTime = "VisitDateTime",
-    ClientData = "ClientData"
+    ClientData = "ClientData",
+    OutcomeIndex = "OutcomeIndex",
+    AbleToMakeDecisions = "AbleToMakeDecisions",
+    CareDecisions = "CareDecisions"
 }
 
 export enum Strings {
@@ -55,6 +60,8 @@ export enum Strings {
     ASK_VISIT_MSG = "ASK_VISIT_MSG",
     ASK_CLIENT_NAME_MSG = "ASK_CLIENT_NAME_MSG",
     ASK_CLIENT_ADDRESS_MSG = "ASK_CLIENT_ADDRESS_MSG",
+    ASK_IF_IS_ABLE_TO_MAKE_DECISIONS_MSG = "ASK_IF_IS_ABLE_TO_MAKE_DECISIONS_MSG",
+    ASK_CARE_DECISIONS_MSG = "ASK_CARE_DECISIONS_MSG",
     WELCOME_MSG = "WELCOME_MSG",
     GOODBYE_MSG = "GOODBYE_MSG",
     HELP_MSG = "HELP_MSG",
@@ -92,6 +99,12 @@ export enum ConsoleColorBg {
     magenta = "\x1b[45m",
     cyan = "\x1b[46m",
     white = "\x1b[47m"
+}
+
+export enum DecisionStatus {
+    Yes = "Yes",
+    No = "No",
+    Wait = "Wait"
 }
 
 export const OutcomeList = [

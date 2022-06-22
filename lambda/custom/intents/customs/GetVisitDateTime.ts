@@ -1,6 +1,6 @@
 import { HandlerInput, RequestHandler } from 'ask-sdk-core';
 
-import { AttributesSession, errorHelper, IntentTypes, skillHelpers, SlotsTypes, Strings } from '../../lib';
+import { AttributesSession, DecisionStatus, errorHelper, IntentTypes, skillHelpers, SlotsTypes, Strings } from '../../lib';
 import {
     IntentRequest,
 } from 'ask-sdk-model';
@@ -77,13 +77,20 @@ export const GetVisitDateTime: RequestHandler = {
 
 function setClientOrOutcome(handlerInput: HandlerInput): string {
     const { tr } = skillHelpers.getRequestAttributes(handlerInput);
-    const attribute = skillHelpers.getSessionAttributesByName(handlerInput, AttributesSession.ClientData);
+    const attribute = skillHelpers.getSessionAttributes(handlerInput);
 
-    if (_.isEmpty(attribute)) {
-        return tr(Strings.ASK_CLIENT_MSG);
+    switch (true) {
+        case _.isEmpty(attribute[AttributesSession.ClientData].value):
+            return tr(Strings.ASK_CLIENT_MSG);
+        case _.isEmpty(attribute[AttributesSession.AbleToMakeDecisions].value):
+            skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.AbleToMakeDecisions]: DecisionStatus.Wait });
+            return tr(Strings.ASK_IF_IS_ABLE_TO_MAKE_DECISIONS_MSG);
+        case _.isEmpty(attribute[AttributesSession.CareDecisions].value):
+            skillHelpers.setSessionAttributes(handlerInput, { [AttributesSession.CareDecisions]: DecisionStatus.Wait });
+            return tr(Strings.ASK_CARE_DECISIONS_MSG);
+        case _.isEmpty(attribute[AttributesSession.OutcomeIndex].value):
+            aplHelpers.createOutcomeApl(handlerInput);
+
+            return tr(Strings.ASK_OUTCOME_MSG);
     }
-
-    aplHelpers.createOutcomeApl(handlerInput);
-
-    return tr(Strings.ASK_OUTCOME_MSG);
 }
